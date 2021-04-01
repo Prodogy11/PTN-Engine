@@ -24,6 +24,7 @@
 #include "PTN_Engine/Utilities/DetectRepeated.h"
 #include "PTN_Engine/Utilities/LockWeakPtr.h"
 #include <algorithm>
+#include <random>
 
 namespace ptne
 {
@@ -101,7 +102,9 @@ vector<Transition *> PTN_Engine::PTN_EngineImp::collectEnabledTransitionsRandoml
             enabledTransitions.push_back(&transition);
 		}
 	}
-	random_shuffle(enabledTransitions.begin(), enabledTransitions.end());
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(enabledTransitions.begin(), enabledTransitions.end(), rd);
 	return enabledTransitions;
 }
 
